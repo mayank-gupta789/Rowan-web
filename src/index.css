@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=DM+Sans:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Surfaces */
+    --background:             340 7% 5%;
+    --card:                   340 6% 9%;
+    --popover:                340 6% 9%;
+    --secondary:              340 6% 9%;
+    --muted:                  340 5% 14%;
+
+    /* Text */
+    --foreground:             33 30% 94%;
+    --card-foreground:        33 30% 94%;
+    --popover-foreground:     33 30% 94%;
+    --secondary-foreground:   33 30% 94%;
+    --muted-foreground:       20 9% 68%;
+    --accent-foreground:      33 30% 94%;
+
+    /* Accent — dusty rose replaces orange */
+    --primary:                341 32% 64%;
+    --primary-foreground:     340 7% 5%;
+
+    /* Deep claret — rare, full-bleed moments only */
+    --accent:                 344 38% 38%;
+
+    /* Lines */
+    --border:                 340 6% 16%;
+    --input:                  340 6% 9%;
+    --ring:                   341 32% 64%;
+
+    /* System */
+    --radius:                 0.125rem;
+    --destructive:            0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Fonts */
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body:    "DM Sans", system-ui, sans-serif;
+    --font-mono:    "Space Mono", ui-monospace, monospace;
+
+    /* Motion */
+    --ease-luxe: cubic-bezier(.25, .46, .45, .94);
+    --duration-subtle: 200ms;
+    --duration-medium: 320ms;
+    --duration-slow:   600ms;
+  }
+
+  .dark {
+    --background:             340 7% 5%;
+    --card:                   340 6% 9%;
+    --popover:                340 6% 9%;
+    --secondary:              340 6% 9%;
+    --muted:                  340 5% 14%;
+    --foreground:             33 30% 94%;
+    --card-foreground:        33 30% 94%;
+    --popover-foreground:     33 30% 94%;
+    --secondary-foreground:   33 30% 94%;
+    --muted-foreground:       20 9% 68%;
+    --accent-foreground:      33 30% 94%;
+    --primary:                341 32% 64%;
+    --primary-foreground:     340 7% 5%;
+    --accent:                 344 38% 38%;
+    --border:                 340 6% 16%;
+    --input:                  340 6% 9%;
+    --ring:                   341 32% 64%;
+    --destructive:            0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+    overflow-x: clip;
+    font-feature-settings: "kern" 1, "liga" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p {
+    line-height: 1.7;
+    max-width: 65ch;
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
+@layer components {
+
+  /* Layout */
+  .section-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-left: clamp(24px, 5vw, 80px);
+    padding-right: clamp(24px, 5vw, 80px);
+  }
+
+  .section-spacing {
+    padding-top:    clamp(96px, 14vw, 180px);
+    padding-bottom: clamp(96px, 14vw, 180px);
+  }
+
+  .section-spacing-sm {
+    padding-top:    clamp(64px, 8vw, 96px);
+    padding-bottom: clamp(64px, 8vw, 96px);
+  }
+
+  /* Buttons — near-square, no shadows, no scale bounce */
+  .btn-primary {
+    display: inline-block;
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    padding: 14px 40px;
+    border-radius: 2px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--duration-subtle) var(--ease-luxe);
+    line-height: 1;
+  }
+
+  .btn-primary:hover {
+    background-color: hsl(var(--accent));
+  }
+
+  .btn-secondary {
+    display: inline-block;
+    background-color: transparent;
+    color: hsl(var(--foreground));
+    padding: 14px 40px;
+    border-radius: 2px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    border: 1px solid hsl(var(--muted-foreground));
+    cursor: pointer;
+    transition: border-color var(--duration-subtle) var(--ease-luxe),
+                color var(--duration-subtle) var(--ease-luxe);
+    line-height: 1;
+  }
+
+  .btn-secondary:hover {
+    border-color: hsl(var(--primary));
+    color: hsl(var(--primary));
+  }
+
+  /* Cards — square corners, no shadow */
+  .card-premium {
+    background-color: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    border-radius: 2px;
+    padding: 24px;
+    transition: border-color var(--duration-subtle) var(--ease-luxe);
+  }
+
+  .card-premium:hover {
+    border-color: hsl(var(--primary) / 0.3);
+  }
+
+  /* Inputs */
+  .input-premium {
+    background-color: hsl(var(--input));
+    border: 1px solid hsl(var(--border));
+    border-radius: 2px;
+    padding: 12px 16px;
+    color: hsl(var(--foreground));
+    font-family: var(--font-body);
+    font-size: 15px;
+    width: 100%;
+    outline: none;
+    transition: border-color var(--duration-subtle) var(--ease-luxe);
+  }
+
+  .input-premium::placeholder {
+    color: hsl(var(--muted-foreground));
+  }
+
+  .input-premium:focus {
+    border-color: hsl(var(--primary));
+  }
+
+  /* Grain overlay — raised to visible */
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    z-index: 9999;
+  }
+
+  /* Type utilities */
+  .display-heading {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: hsl(var(--muted-foreground));
+  }
+
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: hsl(var(--muted-foreground));
+  }
+
+  /* Hairline rule */
+  .rule-rose {
+    display: block;
+    height: 1px;
+    background-color: hsl(var(--primary));
+    flex-shrink: 0;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
